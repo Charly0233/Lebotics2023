@@ -5,8 +5,10 @@
 package frc.robot;
 
 import frc.robot.commands.ChassisCommand;
+import frc.robot.commands.ChassisSwerveCommand;
 import frc.robot.commands.GripperCommand;
-import frc.robot.subsystems.ChassisSubsystem;
+import frc.robot.subsystems.ChassisTankSubsystem;
+import frc.robot.subsystems.ChassisSwerveSubsystem;
 import frc.robot.subsystems.GripperSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -17,11 +19,12 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  final ChassisTankSubsystem chassisSubsystem = new ChassisTankSubsystem();
+  final ChassisSwerveSubsystem chassisSwervesSubsystem = new ChassisSwerveSubsystem();
   
-  private final ChassisSubsystem chassisSubsystem = new ChassisSubsystem();
-  private final ChassisCommand chassisCommand = new ChassisCommand(chassisSubsystem);
   private final GripperSubsystem gripperSubsystem = new GripperSubsystem();
   private final GripperCommand gripperCommand = new GripperCommand(gripperSubsystem);
+ 
 
   public RobotContainer() {
     configureBindings();
@@ -33,8 +36,21 @@ public class RobotContainer {
     return null;
   }
 
-  public Command getChassisCommand(){
-    return chassisCommand;
+  public Command getChassisCommand(String type){
+    switch(type){
+      case "tank":{
+        final ChassisCommand chassisCommand = new ChassisCommand(chassisSubsystem);
+        return chassisCommand;
+      }
+      case "swerve":{
+        final ChassisSwerveCommand chassisCommand = new ChassisSwerveCommand(chassisSwervesSubsystem);
+        return chassisCommand;
+      }
+      default:{
+        final ChassisCommand chassisCommand = new ChassisCommand(chassisSubsystem);
+        return chassisCommand;
+      }
+    }
   }
   public Command getGripperCommand(){
     return gripperCommand;

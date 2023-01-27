@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -17,8 +19,30 @@ import edu.wpi.first.wpilibj.XboxController;
 public final class Constants {
   public static XboxController driver1 = new XboxController(0);
 
+
+
+  public static class SwerveDriveTrainChassis{
+    public static final double kMaxSpeed = 3.0; // 3 meters per second
+    public static final double kMaxAngularSpeed = Math.PI; // 1/2 rotation per second
+
+  }
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+  }
+
+
+
+
+
+  
+  public static class IMU{
+    private static final ADIS16448_IMU imu = new ADIS16448_IMU();
+    public IMU(){
+      imu.calibrate();
+    }
+    public static ADIS16448_IMU getIMU(){
+      return imu;
+    }
   }
   
 }

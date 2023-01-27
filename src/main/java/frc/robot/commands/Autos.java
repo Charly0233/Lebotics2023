@@ -4,13 +4,13 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ChassisSubsystem;
+import frc.robot.subsystems.ChassisTankSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 
 public final class Autos {
   /** Example static factory for an autonomous command. */
-  public static CommandBase exampleAuto(ChassisSubsystem subsystem) {
+  public static CommandBase exampleAuto(ChassisTankSubsystem subsystem) {
     return Commands.sequence(subsystem.exampleMethodCommand(), new ChassisCommand(subsystem));
   }
 

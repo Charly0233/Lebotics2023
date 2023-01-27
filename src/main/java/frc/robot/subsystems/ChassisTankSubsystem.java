@@ -10,24 +10,23 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.IMU;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.SPI;
 
-public class ChassisSubsystem extends SubsystemBase {
+public class ChassisTankSubsystem extends SubsystemBase {
 
 
   VictorSP chassis_motor_left = new VictorSP(0);
   VictorSP chassis_motor_right = new VictorSP(1);
   DifferentialDrive drive = new DifferentialDrive(chassis_motor_left, chassis_motor_right);
-  private ADIS16448_IMU imu = new ADIS16448_IMU();
   private PIDController balance_pid = new PIDController(.1, 0, 0);
   private PIDController compass_pid = new PIDController(.015, 0, 0);
 
   private double speed, speedV;
 
-  public ChassisSubsystem() {
-    imu.calibrate();
+  public ChassisTankSubsystem() {
     speed = 1;
     speedV = .4;
     chassis_motor_right.setInverted(true);
@@ -93,7 +92,7 @@ public class ChassisSubsystem extends SubsystemBase {
 	} 
 
   public void autoBalanceRun(){
-    double correction_speed = balance_pid.calculate(imu.getGyroAngleX(), 0);
+    double correction_speed = balance_pid.calculate(IMU.getIMU().getGyroAngleX(), 0);
     drive.tankDrive( correction_speed, correction_speed);
 
   }
@@ -103,7 +102,7 @@ public class ChassisSubsystem extends SubsystemBase {
   }
 
   public boolean setTurn(int desired_angle){
-    double current_angle = imu.getGyroAngleZ();
+    double current_angle = IMU.getIMU().getGyroAngleZ();
     int error = 1;
     double correction_speed = compass_pid.calculate(current_angle, desired_angle);
     drive.tankDrive( correction_speed, -correction_speed);
@@ -119,8 +118,8 @@ public class ChassisSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // System.out.println("angleX:"+imu.getGyroAngleX()+" angleY:"+imu.getGyroAngleY()+" angleZ:"+imu.getGyroAngleZ());
-    SmartDashboard.putNumber("Angle X", imu.getGyroAngleX());
-    SmartDashboard.putNumber("Angle Z", imu.getGyroAngleZ());
+    SmartDashboard.putNumber("Angle X", IMU.getIMU().getGyroAngleX());
+    SmartDashboard.putNumber("Angle Z", IMU.getIMU().getGyroAngleZ());
     
   }
 

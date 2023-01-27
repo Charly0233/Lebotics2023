@@ -1,0 +1,6 @@
+# Phoenix (Pro and v5):
+https://maven.ctr-electronics.com/release/com/ctre/phoenixpro/PhoenixProAnd5-frc2023-latest.json
+
+
+# REV Robotics REVLib - Library for all REV devices including SPARK MAX and Color Sensor V3
+https://software-metadata.revrobotics.com/REVLib-2023.json

@@ -5,16 +5,16 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.subsystems.ChassisSubsystem;
+import frc.robot.subsystems.ChassisTankSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ChassisCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ChassisSubsystem m_subsystem;
+  private final ChassisTankSubsystem m_subsystem;
   private boolean auto_balance_on, auto_balance_off;
 
-  public ChassisCommand(ChassisSubsystem subsystem) {
+  public ChassisCommand(ChassisTankSubsystem subsystem) {
     m_subsystem = subsystem;
     addRequirements(subsystem);
   }
