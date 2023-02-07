@@ -26,6 +26,8 @@ public class ChassisCommand extends CommandBase {
   public void execute() {
     double throttle = -Constants.driver1.getLeftY();
     double throttle_turn = Constants.driver1.getRightX();
+    // boolean left = Constants.driver1.getLeftBumper();
+    // boolean right = Constants.driver1.getRightBumper();
     boolean left = Constants.driver1.getLeftBumper();
     boolean right = Constants.driver1.getRightBumper();
     m_subsystem.drive(throttle, throttle_turn, left, right);
@@ -60,7 +62,8 @@ public class ChassisCommand extends CommandBase {
       m_subsystem.autoBalanceStop();
       SmartDashboard.putBoolean("AutoBalance", false);    }
 
-    if (Constants.driver1.getBButton() == true) {
+    // if (Constants.driver1.getBButton() == true) {
+      if (Constants.driver1.getBButton() == true) {
       if (!auto_balance_off) {
         auto_balance_on = !auto_balance_on;
         auto_balance_off = true;

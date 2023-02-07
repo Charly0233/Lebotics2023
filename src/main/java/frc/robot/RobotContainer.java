@@ -7,9 +7,11 @@ package frc.robot;
 import frc.robot.commands.ChassisCommand;
 import frc.robot.commands.ChassisSwerveCommand;
 import frc.robot.commands.GripperCommand;
+import frc.robot.commands.LimeLight2Command;
 import frc.robot.subsystems.ChassisTankSubsystem;
 import frc.robot.subsystems.ChassisSwerveSubsystem;
 import frc.robot.subsystems.GripperSubsystem;
+import frc.robot.subsystems.LimeLight2Subsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -25,6 +27,8 @@ public class RobotContainer {
   private final GripperSubsystem gripperSubsystem = new GripperSubsystem();
   private final GripperCommand gripperCommand = new GripperCommand(gripperSubsystem);
  
+  private final LimeLight2Subsystem limeLight2Subsystem = new LimeLight2Subsystem();
+  private final LimeLight2Command limeLight2Command = new LimeLight2Command(limeLight2Subsystem, chassisSwervesSubsystem);
 
   public RobotContainer() {
     configureBindings();
@@ -54,5 +58,9 @@ public class RobotContainer {
   }
   public Command getGripperCommand(){
     return gripperCommand;
+  }
+
+  public Command getLimeLight2Command(){
+    return limeLight2Command;
   }
 }

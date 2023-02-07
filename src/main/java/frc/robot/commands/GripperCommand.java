@@ -26,6 +26,9 @@ public class GripperCommand extends CommandBase {
     // subsystem.drive(throttle, throttle_turn, left, right);
     subsystem.rotateGripper( Constants.driver1.getRightY() );
 
+    subsystem.grab(Constants.driver2.getXButton(), Constants.driver2.getBButton());
+    subsystem.grab(Constants.driver2.getRightY());
+
   }
 
   // Called once the command ends or is interrupted.

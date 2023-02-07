@@ -78,6 +78,8 @@ public class Robot extends TimedRobot {
     chassisCommand.schedule();
     Command gripperCommand = m_robotContainer.getGripperCommand();
     gripperCommand.schedule();
+    Command limeLight2Command = m_robotContainer.getLimeLight2Command();
+    limeLight2Command.schedule();
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();

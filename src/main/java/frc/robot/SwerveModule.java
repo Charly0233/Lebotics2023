@@ -14,7 +14,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants.SwerveDriveTrainChassis;
+import frc.robot.Constants.SwerveDriveChassis;
 
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
@@ -28,7 +28,7 @@ public class SwerveModule {
   public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
 
 
-  private static final double kModuleMaxAngularVelocity = SwerveDriveTrainChassis.kMaxAngularSpeed;
+  private static final double kModuleMaxAngularVelocity = SwerveDriveChassis.kMaxAngularSpeed;
   private static final double kModuleMaxAngularAcceleration = 2 * Math.PI; // radians per second squared
   // private static final double kWheelDiameterMeters = Units.inchesToMeters(4);
   // private static final double kDriveMotorGearRatio = 1 / 5.8462;
