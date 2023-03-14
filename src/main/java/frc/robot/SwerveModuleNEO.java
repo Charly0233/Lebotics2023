@@ -34,7 +34,7 @@ public class SwerveModuleNEO {
   private static final double kTurningMotorGearRatio = 1 / 14.0;
   private static final double kTurningEncoderRot2Rad = kTurningMotorGearRatio * 2 * Math.PI;
   private static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60;
-  private static final double kPTurning = 0.2;
+  private static final double kPTurning = 0.7;
 
   private final CANSparkMax m_driveMotor;
   private final CANSparkMax m_turningMotor;

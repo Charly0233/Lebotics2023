@@ -7,6 +7,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Constants.ChassisMode;
+import frc.robot.Constants.ControllerPS4;
+import frc.robot.Constants.ControllerType;
+import frc.robot.Constants.ControllerXbox;
 import frc.robot.subsystems.ChassisSwerveSubsystem;
 import frc.robot.subsystems.LimeLight2Subsystem;
 
@@ -27,7 +30,7 @@ public class LimeLight2Command extends CommandBase {
 
   @Override
   public void execute() {
-    if(Constants.driver1.getRightStickButtonPressed()){
+    if( (Constants.driver1_type == ControllerType.PS4) ? ControllerPS4.driver1.getR3ButtonPressed() : ControllerXbox.driver1.getRightStickButtonPressed()){
       turn_lights = !turn_lights;
     }
 

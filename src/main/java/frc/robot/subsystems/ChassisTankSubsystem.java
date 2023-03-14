@@ -10,9 +10,8 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.IMU;
+import frc.robot.Constants.IMURobot;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.SPI;
 
 public class ChassisTankSubsystem extends SubsystemBase {
@@ -92,9 +91,8 @@ public class ChassisTankSubsystem extends SubsystemBase {
 	} 
 
   public void autoBalanceRun(){
-    double correction_speed = balance_pid.calculate(IMU.getIMU().getGyroAngleX(), 0);
+    double correction_speed = balance_pid.calculate(IMURobot.getPitch(), 0);
     drive.tankDrive( correction_speed, correction_speed);
-
   }
   public void autoBalanceStop(){
     balance_pid.reset();
@@ -102,7 +100,7 @@ public class ChassisTankSubsystem extends SubsystemBase {
   }
 
   public boolean setTurn(int desired_angle){
-    double current_angle = IMU.getIMU().getGyroAngleZ();
+    double current_angle = IMURobot.getYaw();
     int error = 1;
     double correction_speed = compass_pid.calculate(current_angle, desired_angle);
     drive.tankDrive( correction_speed, -correction_speed);
@@ -115,16 +113,18 @@ public class ChassisTankSubsystem extends SubsystemBase {
       return false;
   }
 
+
+  
   @Override
   public void periodic() {
-    // System.out.println("angleX:"+imu.getGyroAngleX()+" angleY:"+imu.getGyroAngleY()+" angleZ:"+imu.getGyroAngleZ());
-    SmartDashboard.putNumber("Angle X", IMU.getIMU().getGyroAngleX());
-    SmartDashboard.putNumber("Angle Z", IMU.getIMU().getGyroAngleZ());
+    // System.out.println("angleX:"+IMURobot.getPitch()+" angleY:"+IMURobot.getGyroAngleY()+" angleZ:"+IMURobot.getYaw());
+    SmartDashboard.putNumber("Angle X", IMURobot.getPitch());
+    SmartDashboard.putNumber("Angle Z", IMURobot.getYaw());
     
   }
 
   @Override
   public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
+    // This method will be called once per scheduler run during sIMURobotlation
   }
 }

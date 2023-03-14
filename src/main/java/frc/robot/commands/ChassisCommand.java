@@ -5,6 +5,9 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import frc.robot.Constants.ControllerPS4;
+import frc.robot.Constants.ControllerType;
+import frc.robot.Constants.ControllerXbox;
 import frc.robot.subsystems.ChassisTankSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -24,16 +27,18 @@ public class ChassisCommand extends CommandBase {
 
   @Override
   public void execute() {
-    double throttle = -Constants.driver1.getLeftY();
-    double throttle_turn = Constants.driver1.getRightX();
+
+
+    double throttle = (Constants.driver1_type == ControllerType.PS4) ? -ControllerPS4.driver1.getLeftY() : -ControllerXbox.driver1.getLeftY();
+    double throttle_turn = (Constants.driver1_type == ControllerType.PS4) ? ControllerPS4.driver1.getRightX() : ControllerXbox.driver1.getRightX();
     // boolean left = Constants.driver1.getLeftBumper();
     // boolean right = Constants.driver1.getRightBumper();
-    boolean left = Constants.driver1.getLeftBumper();
-    boolean right = Constants.driver1.getRightBumper();
+    boolean left = (Constants.driver1_type == ControllerType.PS4) ? ControllerPS4.driver1.getL1Button() : ControllerXbox.driver1.getLeftBumper();
+    boolean right = (Constants.driver1_type == ControllerType.PS4) ? ControllerPS4.driver1.getR1Button() : ControllerXbox.driver1.getRightBumper();
     m_subsystem.drive(throttle, throttle_turn, left, right);
 
 
-    switch(Constants.driver1.getPOV()){
+    switch((Constants.driver1_type == ControllerType.PS4) ? ControllerPS4.driver1.getPOV() : ControllerXbox.driver1.getPOV()){
       case 0:{
         m_subsystem.setTurn(0);
         break;
@@ -62,8 +67,7 @@ public class ChassisCommand extends CommandBase {
       m_subsystem.autoBalanceStop();
       SmartDashboard.putBoolean("AutoBalance", false);    }
 
-    // if (Constants.driver1.getBButton() == true) {
-      if (Constants.driver1.getBButton() == true) {
+    if ((Constants.driver1_type == ControllerType.PS4) ? ControllerPS4.driver1.getCircleButton() : ControllerXbox.driver1.getBButton()  == true) {
       if (!auto_balance_off) {
         auto_balance_on = !auto_balance_on;
         auto_balance_off = true;
