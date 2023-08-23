@@ -32,8 +32,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   PIDController pid = new PIDController(0.006, 0, 0.001); //p = 0.006, d = 0.001
   private static final double MOTOR_LIMIT = 8.5;
   private static double motor_limit_rotation = MOTOR_LIMIT;
-  private final double force_speed1 = 0.17;
-  private final double force_speed2 = 0.17;
+  private final double force_speed1 = 0.45;
+  private final double force_speed2 = 0.45;
 
   public ElevatorSubsystem() {
     motor1_encoder = motor1.getEncoder();
