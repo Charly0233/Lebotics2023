@@ -28,8 +28,11 @@ public class GripperCommand extends CommandBase {
   public void execute() {
     subsystem.grab( (Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getRightY() : ControllerXbox.driver2.getRightY());
     //diver1 and inverted bumpers
-    subsystem.grabTake( (Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver1.getL1Button() : ControllerXbox.driver1.getLeftBumper());
-    subsystem.grabRelease( (Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver1.getR1Button() : ControllerXbox.driver1.getRightBumper());
+    subsystem.grabTake( (Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getSquareButton() : ControllerXbox.driver2.getXButton());
+    subsystem.grabTake2( (Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getTriangleButton() : ControllerXbox.driver2.getYButton());
+    subsystem.grabRelease( (Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getCircleButton() : ControllerXbox.driver2.getBButton());
+    subsystem.grabRelease2( (Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getCrossButton() : ControllerXbox.driver2.getAButton());
+    subsystem.grabReleaseSTRONG( (Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getR2Button() : ControllerXbox.driver2.getRightBumper());
   }
 
   @Override

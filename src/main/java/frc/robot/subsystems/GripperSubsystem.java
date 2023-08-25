@@ -53,10 +53,31 @@ public class GripperSubsystem extends SubsystemBase {
     }
   }
   
+  public void grabTake2(boolean _input){
+    if(_input){
+      motor1.set(0.7);
+      motor2.set(-0.7);
+    }
+  }
+  
   public void grabRelease(boolean _input){
     if(_input){
       motor1.set(-0.7);
       motor2.set(0.7);
+    }
+  }
+  
+  public void grabRelease2(boolean _input){
+    if(_input){
+      motor1.set(-0.5);
+      motor2.set(0.5);
+    }
+  }
+
+  public void grabReleaseSTRONG(boolean _input){
+    if(_input){
+      motor1.set(-1);
+      motor2.set(1);
     }
   }
 
