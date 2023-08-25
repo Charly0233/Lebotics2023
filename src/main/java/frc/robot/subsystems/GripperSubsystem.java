@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
@@ -17,32 +18,66 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 
 public class GripperSubsystem extends SubsystemBase {
- 
-  VictorSPX seat_motor = new VictorSPX(12);
+ private static final CANSparkMax motor1 = new CANSparkMax(12, MotorType.kBrushless);
+ private static final CANSparkMax motor2 = new CANSparkMax(13, MotorType.kBrushless);
 
-  public GripperSubsystem() {
+/*private RelativeEncoder motor1_encoder;
+ private RelativeEncoder motor2_encoder;
+*/
+  //VictorSPX seat_motor = new VictorSPX(12);
+
+  public GripperSubsystem() {/* 
+    motor1_encoder=motor1.getEncoder();
+    motor2_encoder=motor2.getEncoder();*/
   
   }
 
 
   public void grab(double _input){
-    if(_input > .1 || _input < -.1){
-      seat_motor.set(ControlMode.PercentOutput, -_input);
-
+    if(_input > .1 ){
+      motor1.set(_input);
+      motor2.set(_input*-1);
+    }else if (_input < -.10){
+      motor1.set(_input);
+      motor2.set(_input*-1);
     }else{
-      seat_motor.set(ControlMode.PercentOutput, 0);
+      motor1.set(0);
+      motor2.set(0);
     }
   }
 
   public void grabTake(boolean _input){
     if(_input){
-      seat_motor.set(ControlMode.PercentOutput, 0.4);
+      motor1.set(0.3);
+      motor2.set(-0.3);
+    }
+  }
+  
+  public void grabTake2(boolean _input){
+    if(_input){
+      motor1.set(0.7);
+      motor2.set(-0.7);
     }
   }
   
   public void grabRelease(boolean _input){
     if(_input){
-      seat_motor.set(ControlMode.PercentOutput, -0.4);
+      motor1.set(-0.7);
+      motor2.set(0.7);
+    }
+  }
+  
+  public void grabRelease2(boolean _input){
+    if(_input){
+      motor1.set(-0.5);
+      motor2.set(0.5);
+    }
+  }
+
+  public void grabReleaseSTRONG(boolean _input){
+    if(_input){
+      motor1.set(-1);
+      motor2.set(1);
     }
   }
 

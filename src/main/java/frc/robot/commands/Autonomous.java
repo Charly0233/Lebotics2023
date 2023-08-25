@@ -22,8 +22,27 @@ public class Autonomous extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new DriveDistance(_chassisSwerveSubsystem, 105, InitializeWheels.VERTICAL),
+      new autoBalanceCommand(_chassisSwerveSubsystem)
       // new DriveDistance(_chassisSwerveSubsystem, -25, InitializeWheels.LATERAL)
 
+      
+      //prueba 1
+      /* 
+      new DriveDistance(_chassisSwerveSubsystem, 150,InitializeWheels.VERTICAL ),
+      new DriveDistance(_chassisSwerveSubsystem, 100,InitializeWheels.LATERAL ),
+      new DriveDistance(_chassisSwerveSubsystem, 150,InitializeWheels.VERTICAL ),
+      new DriveDistance(_chassisSwerveSubsystem, -100,InitializeWheels.LATERAL ),
+      new DriveDistance(_chassisSwerveSubsystem, -150,InitializeWheels.VERTICAL ),
+      */
+      
+      /* 
+      new DriveDistance(_chassisSwerveSubsystem, 150, InitializeWheels.VERTICAL),
+      new DriveDistance(_chassisSwerveSubsystem, 150, InitializeWheels.LATERAL),
+      new DriveDistance(_chassisSwerveSubsystem, 100, InitializeWheels.VERTICAL),
+      new DriveDistance(_chassisSwerveSubsystem, 300, InitializeWheels.LATERAL),
+      */
+/* 
       new DriveDistance(_chassisSwerveSubsystem, -25, InitializeWheels.VERTICAL),
       new WaitCommand(1500),
       new ParallelRaceGroup(
@@ -47,8 +66,7 @@ public class Autonomous extends SequentialCommandGroup {
         new WaitCommand(7000)
       ),
       new DriveTurn(_chassisSwerveSubsystem, 5)
-
-
+*/
 
     );
   }
