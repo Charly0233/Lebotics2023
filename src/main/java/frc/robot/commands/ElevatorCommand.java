@@ -27,13 +27,13 @@ private final ElevatorSubsystem subsystem;
 
   @Override
   public void execute() {
-    subsystem.move((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getLeftY() : ControllerXbox.driver2.getLeftY() );
+    //subsystem.move((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getLeftY() : ControllerXbox.driver2.getLeftY() );
 
     // subsystem.move((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getTriangleButtonPressed() : ControllerXbox.driver2.getYButtonPressed(),
                   //  (Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getCrossButtonPressed() : ControllerXbox.driver2.getAButtonPressed());
     
-    subsystem.moveMaster((Constants.driver1_type == ControllerType.PS4) ? ControllerPS4.driver1.getL2Axis() : ControllerXbox.driver1.getLeftTriggerAxis(),
-                         (Constants.driver1_type == ControllerType.PS4) ? ControllerPS4.driver1.getR2Axis() : ControllerXbox.driver1.getRightTriggerAxis() );
+    subsystem.moveMaster((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getL2Axis() : ControllerXbox.driver2.getLeftTriggerAxis(),
+                         (Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getR2Axis() : ControllerXbox.driver2.getRightTriggerAxis() );
   
   
   }

@@ -28,11 +28,10 @@ public class ElevatorSubsystem extends SubsystemBase {
   private RelativeEncoder motor1_encoder;
   
   PIDController pid = new PIDController(0.006, 0, 0.001); //p = 0.006, d = 0.001
-  private static final double MOTOR_LIMIT = 110;
+  private static final double MOTOR_LIMIT = 79;
   
   static double motor_limit_rotation = MOTOR_LIMIT;
   private final double force_speed1 = 0.65;
-  private final double force_speed2 = 0.65;
 
   public ElevatorSubsystem() {
     motor1_encoder = motor1.getEncoder();
@@ -48,30 +47,36 @@ public class ElevatorSubsystem extends SubsystemBase {
     motor_limit_rotation = pitchAngleDegrees+90;
   }
 
-
+/* 
   public void move(double speed){
     double pitchAngleDegrees = IMUElevator.getPitch(); // ahrs.getPitch();
+    System.out.print("algo:  "+ pitchAngleDegrees);
     speed *= -1;
     speed *= force_speed2;
-    if(speed >= 0.1 && pitchAngleDegrees <  motor_limit_rotation){ //ascending
-      moveLeft(speed);
-      moveRight(speed);
+    
+
+    if(speed >= 0.1 && motor1_encoder.getPosition() < 80){ //ascending
+      moveLeft(0.5);
+      moveRight(0.5);
       System.out.println("ASCENDING");
     }
     else if(speed <= -0.1){//descending
-      moveLeft(-1);
-      moveRight(-1);
+      moveLeft(-.3);
+      moveRight(-.3);
       System.out.println("ASCENDING");
 
-    }
-    else{
-      moveLeft(0.0);
-      moveRight(0.0);
-    }
+    }else if(Math.abs(pitchAngleDegrees) > 23) {
+      moveLeft(0.03);
+      moveRight(0.03);
+    }    else {
+      moveLeft(0);
+      moveRight(0);
+      }
+    
 
 
   }
-
+*/
   public void moveLeft(double speed){
     motor1.set( speed);
   }
@@ -89,15 +94,23 @@ public class ElevatorSubsystem extends SubsystemBase {
     _lower *= force_speed1;
     _raise *= force_speed1;
 
-    if(_raise >= 0.1  && pitchAngleDegrees <  motor_limit_rotation){ //ascending
-      moveLeft(_raise);
-      moveRight(_raise);
-    } else if(_lower >= 0.1){
-      moveLeft(-0.05);
-      moveRight(-0.05);
-    }else{
-      //This is declared in the  move(double) Function
+    
 
+    if(_raise >= 0.1  /*&& Math.abs(pitchAngleDegrees) <  75*/ && motor1_encoder.getPosition() < 80){ //ascending
+      moveLeft(0.5);
+      moveRight(0.5);
+    }
+    else if( /*Math.abs(pitchAngleDegrees) >  5 && */_lower >= 0.1 ){
+      moveLeft(-0.3);
+      moveRight(-0.3);
+    }else if(Math.abs(pitchAngleDegrees) > 23){
+      //This is declared in the  move(double) Function
+      moveLeft(0.03);
+      moveRight(0.03);
+    }
+    else {
+    moveLeft(0);
+    moveRight(0);
     }
   }
 

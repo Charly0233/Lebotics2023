@@ -27,7 +27,7 @@ public class RiseArm extends CommandBase {
   @Override
   public void execute() {
     subsystem.setMotorLimit();
-    subsystem.move(speed);
+    //subsystem.move(speed);
 
   }
 
