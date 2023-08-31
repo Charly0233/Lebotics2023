@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.opencv.video.SparsePyrLKOpticalFlow;
@@ -25,17 +26,68 @@ public class ElevatorSubsystem extends SubsystemBase {
   //private static VictorSPX motor2 = new VictorSPX(12);
   private static final CANSparkMax motor1 = new CANSparkMax(10, MotorType.kBrushless);
 
-  private RelativeEncoder motor1_encoder;
   
-  PIDController pid = new PIDController(0.006, 0, 0.001); //p = 0.006, d = 0.001
   private static final double MOTOR_LIMIT = 79;
   
   static double motor_limit_rotation = MOTOR_LIMIT;
   private final double force_speed1 = 0.65;
+  
+  //pid
+  private RelativeEncoder encoder;
+  final double kP = 0.1; //velocidad
+  final double kI = 0.5; //correcion
+  final double kD = 0.3; //resta de velocidad
+  final double ilimit = 1;
+
+  double setpoint = 0;
+  double errorSum = 0;
+  double lasTimestamp = 0;
+  double lastError = 0;
+  //PIDController pid = new PIDController(0.006, 0, 0.001); //p = 0.006, d = 0.001
+  
+  /*public void MoveTo(double objective){
+    setpoint=objective;
+    double sensorPosition = encoder.getPosition();
+    double error = setpoint - sensorPosition;
+    double dt = Timer.getFPGATimestamp() - lasTimestamp;
+    if(Math.abs(error)<ilimit){
+      errorSum += error*dt;
+    }
+
+    double errorRate = (error-lastError) / dt;
+    double outputSpeed = kP * error + kI *errorSum + kD * errorRate;
+  
+    moveLeft(outputSpeed);
+
+    lasTimestamp = Timer.getFPGATimestamp();
+    lastError = error;
+
+    //return (outputSpeed==0) ? true : false;
+  }*/
+
+  public void MoveTo(double pos){
+    double speedd = 0.5;
+    double sensorPosition = encoder.getPosition();
+    double goal = pos - sensorPosition;
+    speedd=goal/100;
+
+    if(sensorPosition < pos){
+      moveLeft(speedd);
+    }else if(sensorPosition > pos+2 ){
+      moveLeft(speedd);
+    }
+    System.out.println("goal" + goal);
+
+     /*if(goal<=1 ){
+      //goal = 3;
+      return true;
+    } else return false;
+  */}
 
   public ElevatorSubsystem() {
-    motor1_encoder = motor1.getEncoder();
-
+    encoder = motor1.getEncoder();
+    lasTimestamp=Timer.getFPGATimestamp();
+    //MoveTo(0);
   }
   
   public void setMotorLimit(){
@@ -47,36 +99,47 @@ public class ElevatorSubsystem extends SubsystemBase {
     motor_limit_rotation = pitchAngleDegrees+90;
   }
 
-/* 
+
   public void move(double speed){
     double pitchAngleDegrees = IMUElevator.getPitch(); // ahrs.getPitch();
-    System.out.print("algo:  "+ pitchAngleDegrees);
+    //System.out.print("algo:  "+ pitchAngleDegrees);
     speed *= -1;
-    speed *= force_speed2;
+    speed *= force_speed1;
     
 
-    if(speed >= 0.1 && motor1_encoder.getPosition() < 80){ //ascending
+    if(speed >= 0.1 && encoder.getPosition() < 80){ //ascending
       moveLeft(0.5);
       moveRight(0.5);
-      System.out.println("ASCENDING");
+      //System.out.println("ASCENDING");
     }
     else if(speed <= -0.1){//descending
       moveLeft(-.3);
       moveRight(-.3);
-      System.out.println("ASCENDING");
-
+      //System.out.println("ASCENDING");
+      
     }else if(Math.abs(pitchAngleDegrees) > 23) {
       moveLeft(0.03);
       moveRight(0.03);
-    }    else {
+    }
+    else {
       moveLeft(0);
       moveRight(0);
-      }
-    
-
-
+    }
   }
-*/
+
+  public void noMove(){
+    double pitchAngleDegrees = IMUElevator.getPitch(); // ahrs.getPitch();
+
+    if(Math.abs(pitchAngleDegrees) > 23) {
+      moveLeft(0.03);
+      moveRight(0.03);
+    }
+    else {
+      moveLeft(0);
+      moveRight(0);
+    }
+  }
+
   public void moveLeft(double speed){
     motor1.set( speed);
   }
@@ -96,7 +159,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     
 
-    if(_raise >= 0.1  /*&& Math.abs(pitchAngleDegrees) <  75*/ && motor1_encoder.getPosition() < 80){ //ascending
+    if(_raise >= 0.1  /*&& Math.abs(pitchAngleDegrees) <  75*/ && encoder.getPosition() < 80){ //ascending
       moveLeft(0.5);
       moveRight(0.5);
     }
@@ -132,7 +195,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     // moveLeft(speed);
     // moveRight(speed);
 
-    System.out.println("POSITION: "+motor1_encoder.getPosition());
+    System.out.println("POSITION: "+encoder.getPosition());
 
 
   }
