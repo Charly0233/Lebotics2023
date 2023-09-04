@@ -62,8 +62,8 @@ public class GripperSubsystem extends SubsystemBase {
   
   public void escupe(boolean _input){
     if(_input){ //Escupe
-      motor1.set(-0.14);
-      motor2.set(0.14);
+      motor1.set(-0.13);
+      motor2.set(0.13);
     }
   }
   
@@ -81,6 +81,11 @@ public class GripperSubsystem extends SubsystemBase {
     }
   }
 
+  public boolean deten(){
+    motor1.set(0);
+    motor2.set(0);
+    return true;
+  }
 		
   @Override
   public void periodic() {

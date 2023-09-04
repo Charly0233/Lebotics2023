@@ -22,6 +22,22 @@ public class Autonomous extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new GrippingCommand(_gripperSubsystem,_elevatorSubsystem),
+      new WaitCommand(500),
+      new DriveDistance(_chassisSwerveSubsystem, 50, InitializeWheels.VERTICAL),
+      new riseToShot(_elevatorSubsystem),
+      //System.out.println("lavante"),
+      
+      new GrippingCommand(_gripperSubsystem, _elevatorSubsystem),
+      new DriveDistance(_chassisSwerveSubsystem, 50, InitializeWheels.VERTICAL),
+      
+      //new ParallelCommandGroup(
+        //), 
+        new LaunchCommand(_gripperSubsystem),
+        new WaitCommand(500),
+        //new stopLaunchCommand(_gripperSubsystem),
+        new WaitCommand(500),
+
       new DriveDistance(_chassisSwerveSubsystem, 105, InitializeWheels.VERTICAL),
       new autoBalanceCommand(_chassisSwerveSubsystem)
       // new DriveDistance(_chassisSwerveSubsystem, -25, InitializeWheels.LATERAL)

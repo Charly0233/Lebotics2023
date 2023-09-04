@@ -33,7 +33,7 @@ public class DriveTurn extends CommandBase {
   public void execute() {
     boolean turn_done = false;
     turn_done = subsystem.setTurn(angle);
-    System.out.println("Turning to: "+angle+"°"+" -> "+IMURobot.getPitch());
+   // System.out.println("Turning to: "+angle+"°"+" -> "+IMURobot.getPitch());
 
     if(turn_done){
       terminate = true;

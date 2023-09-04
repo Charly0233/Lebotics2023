@@ -25,7 +25,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   //private static VictorSPX motor1 = new VictorSPX(11);
   //private static VictorSPX motor2 = new VictorSPX(12);
   private static final CANSparkMax motor1 = new CANSparkMax(10, MotorType.kBrushless);
-
+  private double EncoderDesface;
   
   private static final double MOTOR_LIMIT = 79;
   
@@ -71,12 +71,12 @@ public class ElevatorSubsystem extends SubsystemBase {
     double goal = pos - sensorPosition;
     speedd=goal/100;
 
-    if(sensorPosition < pos){
+    if(sensorPosition < pos && sensorPosition < 100){
       moveLeft(speedd);
-    }else if(sensorPosition > pos+2 ){
+    }else if(sensorPosition > pos+2 && sensorPosition > 1   ){
       moveLeft(speedd);
     }
-    System.out.println("goal" + goal);
+   // System.out.println("goal" + goal);
 
      /*if(goal<=1 ){
       //goal = 3;
@@ -86,6 +86,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   public ElevatorSubsystem() {
     encoder = motor1.getEncoder();
+    EncoderDesface = encoder.getPosition();
     lasTimestamp=Timer.getFPGATimestamp();
     //MoveTo(0);
   }
@@ -97,6 +98,10 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void resetMotorLimit(){
     double pitchAngleDegrees = IMUElevator.getPitch(); // ahrs.getPitch();#
     motor_limit_rotation = pitchAngleDegrees+90;
+  }
+
+  public double getEncoderPosiiton(){
+    return encoder.getPosition();
   }
 
 
@@ -163,7 +168,7 @@ public class ElevatorSubsystem extends SubsystemBase {
       moveLeft(0.5);
       moveRight(0.5);
     }
-    else if( /*Math.abs(pitchAngleDegrees) >  5 && */_lower >= 0.1 ){
+    else if( encoder.getPosition() > 1 && _lower >= 0.1 ){
       moveLeft(-0.3);
       moveRight(-0.3);
     }else if(Math.abs(pitchAngleDegrees) > 23){

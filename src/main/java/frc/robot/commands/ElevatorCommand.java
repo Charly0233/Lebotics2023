@@ -40,18 +40,18 @@ boolean isDone = false;
 
   @Override
   public void execute() {
-    System.out.print("isDone "+isDone);
+   // System.out.print("isDone "+isDone);
     /*if(isDone==true){
       direction=Direction.Off;
       isDone=false;
     }else*/
-     if((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getL1ButtonPressed() : ControllerXbox.driver2.getLeftBumperPressed()){
+     if((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getL1Button() : ControllerXbox.driver2.getLeftBumper()){
       subsystem.MoveTo(82);
-    } else if((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getShareButtonPressed() : ControllerXbox.driver2.getBackButtonPressed()) {
+    } else if((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getShareButton() : ControllerXbox.driver2.getBackButton()) {
       //direction=Direction.MID;
       subsystem.MoveTo(74);
-    } else if((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getL3ButtonPressed() : ControllerXbox.driver2.getLeftStickButtonPressed()){
-      subsystem.MoveTo(74);
+    } else if((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getL3Button() : ControllerXbox.driver2.getLeftStickButton()){
+      subsystem.MoveTo(58);
       //direction=Direction.DOWN;
     } else {
       subsystem.moveMaster((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getL2Axis() : ControllerXbox.driver2.getLeftTriggerAxis(),

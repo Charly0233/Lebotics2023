@@ -48,7 +48,7 @@ public class DriveDistance extends CommandBase {
     else if(wheels_mode == InitializeWheels.LATERAL){
       subsystem.drive(0, speed, 0, false, false);
     }
-    System.out.println("Driving to: "+distance+"cm -> "+current_distance);
+    //System.out.println("Driving to: "+distance+"cm -> "+current_distance);
     if( (current_distance > Math.abs(distance) - error && current_distance < Math.abs(distance) + error)){
       subsystem.getDistanceReference().resetDriveEncoder();
       subsystem.drive(0, 0, 0, false, false);

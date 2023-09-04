@@ -158,7 +158,7 @@ public class ChassisSwerveSubsystem extends SubsystemBase {
     if(chassis_mode != ChassisMode.CENTEROBJECT) return;
     double speed = -center_object_pid.calculate(_measure, _target);
     drive(0.3, speed, 0, false, false);
-    System.out.println("centering... " + _measure +"  -> "+ speed);
+   // System.out.println("centering... " + _measure +"  -> "+ speed);
 
   }
 
@@ -179,7 +179,7 @@ public class ChassisSwerveSubsystem extends SubsystemBase {
       double current_distance = m_frontLeft.getDriveDistance();
       double speed = drive_distance_pid.calculate(current_distance, _distance);
       drive(speed, 0, 0, false, false);
-      System.out.println("driving... " + current_distance +" to get to "+_distance+"  -> "+ speed);
+      //System.out.println("driving... " + current_distance +" to get to "+_distance+"  -> "+ speed);
       if( (current_distance > _distance - error && current_distance < _distance + error)){
         m_frontLeft.resetDriveEncoder();
         chassis_mode = ChassisMode.MANUAL;
@@ -218,7 +218,7 @@ public class ChassisSwerveSubsystem extends SubsystemBase {
   private PIDController compass_pid = new PIDController(0.05, 0.1, 0.03);
   public boolean setTurn(int desired_angle){
     double current_angle = IMURobot.getPitch();
-    System.out.println("Current Angle: "+ current_angle+ "   desired_angle: "+desired_angle);
+   // System.out.println("Current Angle: "+ current_angle+ "   desired_angle: "+desired_angle);
     int error = 1;
     double correction_speed = -compass_pid.calculate(current_angle, desired_angle);
     drive(0.0, 0.0, correction_speed, false, false);
