@@ -23,7 +23,7 @@ public class LaunchCommand extends CommandBase {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        subsystem.lanza(false);
+        //subsystem.lanza(false);
     }
 
 

@@ -29,6 +29,7 @@ public class DriveDistance extends CommandBase {
   public void initialize() {
     terminate = false;
     subsystem.getDistanceReference().resetDriveEncoder();
+    subsystem.resetEncoders();
     subsystem.initializeWheels(wheels_mode);
 
   }

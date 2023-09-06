@@ -46,14 +46,16 @@ boolean isDone = false;
       isDone=false;
     }else*/
      if((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getL1Button() : ControllerXbox.driver2.getLeftBumper()){
-      subsystem.MoveTo(82);
+      subsystem.MoveTo(92);
     } else if((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getShareButton() : ControllerXbox.driver2.getBackButton()) {
       //direction=Direction.MID;
       subsystem.MoveTo(74);
     } else if((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getL3Button() : ControllerXbox.driver2.getLeftStickButton()){
       subsystem.MoveTo(58);
       //direction=Direction.DOWN;
-    } else {
+    } else if((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getOptionsButtonPressed() : ControllerXbox.driver2.getStartButtonPressed()){
+      subsystem.resetEncoder();
+    }else {
       subsystem.moveMaster((Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getL2Axis() : ControllerXbox.driver2.getLeftTriggerAxis(),
                              (Constants.driver2_type == ControllerType.PS4) ? ControllerPS4.driver2.getR2Axis() : ControllerXbox.driver2.getRightTriggerAxis());
     }

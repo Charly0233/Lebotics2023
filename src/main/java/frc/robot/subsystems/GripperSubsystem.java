@@ -48,8 +48,8 @@ public class GripperSubsystem extends SubsystemBase {
 
   public void chupa(boolean _input){
     if(_input){
-      motor1.set(0.3);
-      motor2.set(-0.3);
+      motor1.set(0.2);
+      motor2.set(-0.2);
     }
   }
   

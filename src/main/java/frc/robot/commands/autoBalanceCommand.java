@@ -10,7 +10,7 @@ import frc.robot.subsystems.ChassisSwerveSubsystem;
 
 public class autoBalanceCommand extends CommandBase {
     private final ChassisSwerveSubsystem subsystem;
-    static final double kOffBalanceAngleThresholdDegrees = 10;
+    static final double kOffBalanceAngleThresholdDegrees = 2;
    // AHRS ahrs;
     double speedX;
 
@@ -30,7 +30,7 @@ public class autoBalanceCommand extends CommandBase {
         SmartDashboard.putNumber("angles", pitchAngleDegrees);
         if(Math.abs(pitchAngleDegrees)>= Math.abs(kOffBalanceAngleThresholdDegrees)){
             double pitchAngleRadians = pitchAngleDegrees * (Math.PI/180.0);
-            speedX = Math.sin(pitchAngleRadians) *-1;
+            speedX = Math.sin(pitchAngleRadians) *-1*2;
         }
         else{
             speedX=0;

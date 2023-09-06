@@ -179,6 +179,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     else {
     moveLeft(0);
     moveRight(0);
+
     }
   }
 
@@ -201,7 +202,9 @@ public class ElevatorSubsystem extends SubsystemBase {
     // moveRight(speed);
 
     System.out.println("POSITION: "+encoder.getPosition());
+  }
 
-
+  public void resetEncoder(){
+    encoder.setPosition(0);
   }
 }

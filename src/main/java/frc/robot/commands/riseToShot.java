@@ -20,9 +20,10 @@ public class riseToShot extends CommandBase {
   //private RelativeEncoder encoder;
 
 
-    public riseToShot(ElevatorSubsystem subsystem) {
+    public riseToShot(ElevatorSubsystem subsystem, int _x) {
         this.subsystem = subsystem;
         EncoderDesface = subsystem.getEncoderPosiiton();
+        x=_x;
 
         addRequirements(subsystem);
     }
@@ -39,10 +40,11 @@ public class riseToShot extends CommandBase {
 
         }else if(sensorPosition > x+2+EncoderDesface && sensorPosition > 1   ){
             subsystem.moveLeft(speedd);
+            System.out.print("goal" + goal+"  ");
         }
         System.out.print("goal" + goal+"  ");
 
-        if(goal<5){
+        if(Math.abs(goal)<5){
             System.out.println(
                 "termine de subir"
             );
