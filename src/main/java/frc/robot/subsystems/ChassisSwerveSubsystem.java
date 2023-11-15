@@ -30,10 +30,10 @@ public class ChassisSwerveSubsystem extends SubsystemBase {
   
   private static ChassisMode chassis_mode;
 
-  private final SwerveModuleNEO m_frontLeft = new SwerveModuleNEO(1, 2, 21, 5.7);
-  private final SwerveModuleNEO m_frontRight = new SwerveModuleNEO(5, 6, 23, 2.78);
-  private final SwerveModuleNEO m_backLeft = new SwerveModuleNEO(3, 4, 22, 0.84);
-  private final SwerveModuleNEO m_backRight = new SwerveModuleNEO(7, 8, 24, 1.43);
+  private final SwerveModuleNEO m_frontLeft = new SwerveModuleNEO(1, 2, 21, 1.30);
+  private final SwerveModuleNEO m_frontRight = new SwerveModuleNEO(5, 6, 23, 2.50);
+  private final SwerveModuleNEO m_backLeft = new SwerveModuleNEO(3, 4, 22, 4.50);
+  private final SwerveModuleNEO m_backRight = new SwerveModuleNEO(7, 8, 24, 2.30);
 
   SwerveModulePosition[] swerve_module_position;
   private final SwerveDriveOdometry odometer; 
